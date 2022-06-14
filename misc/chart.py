@@ -1,6 +1,5 @@
 #https://dash.gallery/dash-deck-explorer/point-cloud-layer
 
-import numpy as np
 import laspy as lp
 import numpy as np
 import pandas as pd
