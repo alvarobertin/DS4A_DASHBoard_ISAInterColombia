@@ -77,4 +77,4 @@ def main():
         print("DONE")
 
 
-main1()
+main()
