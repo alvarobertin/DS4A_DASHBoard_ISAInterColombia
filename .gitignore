@@ -1,5 +1,6 @@
 *.las
 LAS*.csv
+<<<<<<< HEAD
 __pycache__/
 
 # Byte-compiled / optimized / DLL files
@@ -162,3 +163,7 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+=======
+MDS*.txt
+__pycache__/
+>>>>>>> 2ba6e2003f0ca78bafd66244973135ad9a4340df
