@@ -27,6 +27,27 @@ def transform_colors(f):
 
     return (red, green, blue)
 
+def main1():
+    input_path = "../data/"
+    dataname = "MDS-"
+    i = 1
+
+    print("converting #" + str(i) + "...")
+
+    las = lp.read(input_path + dataname + str(i) +".las")
+
+    point_data = np.vstack((las.x, las.y, las.z)).transpose()
+    red, green, blue = transform_colors(las)
+    colors = np.vstack((red, green, blue, las.classification)).transpose()
+
+    df = pd.DataFrame(data = point_data, columns=["x", "y", "z"])
+
+    color = pd.DataFrame(data = colors, columns=["r", "g", "b", "class"])
+
+    m = df.join(color)
+
+    print(m.head(10))
+
 def main():
     input_path = "../data/"
     dataname = "MDS-"
@@ -40,6 +61,8 @@ def main():
         point_data = np.vstack((las.x, las.y, las.z)).transpose()
         red, green, blue = transform_colors(las)
         colors = np.vstack((red, green, blue)).transpose()
+        
+        clas =  np.vstack(las.classification).transpose()
 
         df = pd.DataFrame(data= point_data, columns=["x", "y", "z"])
 
@@ -47,9 +70,11 @@ def main():
 
         m = df.join(color)
 
+        
+
         m.to_csv("LAS-" + str(i) + ".csv")
 
         print("DONE")
 
 
-main()
+main1()
