@@ -3,14 +3,17 @@
 import pandas as pd
 import json
 import pydeck
+import os
 import dash
 import dash_deck
 from dash import html
 
 def main():
-    m = pd.read_csv("torres.csv")
+    # archive = "LAS-1.csv"
+    #archive = "torres.csv"
+    m = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/LAS-1.csv"))
 
-    df2 = m
+    df2 = m[:1000000]
 
     target = [df2.x.mean(), df2.y.mean(), df2.z.mean()]
 
