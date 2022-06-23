@@ -17,7 +17,8 @@ DATA_DIR = "../data/"
 
 def create(archive):
     csv_path = os.path.join(DATA_DIR, archive)
-    m = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/LAS-1.csv"))
+    
+    m = pd.read_csv(os.path.join(os.path.dirname(__file__), csv_path))
 
     df2 = m[:100000]
 
@@ -49,13 +50,13 @@ def create(archive):
 from app import app
 
 
-result = dash_deck.DeckGL(create("LAS-1.csv"), id="deck-gl", style={"background-color": "#add8e6"})
+result = dash_deck.DeckGL(create("LAS-1.csv"), id="deck-gl")
 
 map = html.Div(
     className="ds4a-map",
     children=[
         html.H5("Mapa"),
-        #result
+        html.Div(result, id="containerMap")
     ],
     id="map",
 )

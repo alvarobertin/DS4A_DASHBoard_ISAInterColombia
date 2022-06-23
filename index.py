@@ -35,25 +35,36 @@ app.layout = html.Div(
     [
         title.title,
         dbc.Row([
-            #izq
-            dbc.Col(
-                children=[
-                    map.map
-                ],
-                className="colIzq"
-            ),
-            #der
-            dbc.Col([
-                controlPanel.controlPanel,
-                riskCards.riskCards,
-                riskHeatMap.riskHeatMap,
-                riskPointTable.riskPointTable,
-            ]),
+            controlPanel.controlPanel,
+            map.map,
+            riskCards.riskCards,
+            riskHeatMap.riskHeatMap,
+            riskPointTable.riskPointTable,
         ])
     ],
     className="ds4a-app",  # You can also add your own css files by storing them in the assets folder
 )
 
+
+###############################################
+#
+#           APP INTERACTIVITY:
+#
+###############################################
+
+
+@app.callback(
+    [
+        Output("deck-gl", "data"),
+    ],
+    [
+        Input("lines_dd", "value"),
+    ],
+)
+def make_line_plot(lines_dd):
+    map_data = map.create(lines_dd + ".csv")
+
+    return [map_data]
 
 
 if __name__ == "__main__":

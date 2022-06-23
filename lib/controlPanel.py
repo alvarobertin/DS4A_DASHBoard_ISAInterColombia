@@ -23,8 +23,9 @@ with open(lines_path) as f:
 
 lines_dd = dcc.Dropdown(
     id="lines_dd",
+    value = lines[list(lines.keys())[0]],
     options=[{"label": key, "value": lines[key]} for key in lines.keys()],
-    multi=True,
+    multi=False,
     placeholder="Select Line"
 )
 
