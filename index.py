@@ -1,7 +1,7 @@
 # Basics Requirements
 import pathlib
 import os
-from dash import Dash, callback, html, dcc, dash_table, Input, Output, State, MATCH, ALL
+from dash import Dash, callback, html, dcc, dash_table, Input, Output, State, MATCH, ALL, ctx
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
@@ -19,6 +19,8 @@ import json
 
 # Recall app
 from app import app
+
+DATA_DIR = "data"
 
 ###########################################################
 #
@@ -52,19 +54,37 @@ app.layout = html.Div(
 #
 ###############################################
 
-
+anterior = ""
 @app.callback(
     [
         Output("deck-gl", "data"),
+        Output("section_dd", "options"),
+        Output("section_dd", "value"),
     ],
     [
         Input("lines_dd", "value"),
+        Input("section_dd", "value"),
     ],
 )
-def make_line_plot(lines_dd):
-    map_data = map.create(lines_dd + ".csv")
+def make_line_plot(lines_dd, section_dd):
+    if section_dd == None:
+        a, b = 0, 0
+    else:
+        s = section_dd.split()
+        a = int(s[0])
+        b = int(s[1])
 
-    return [map_data]
+    map_data = map.create(lines_dd + ".csv", a, b)
+    # Esto se debe cambiar para no abrir tantas veces un csv 
+    section_options = controlPanel.secciones(lines_dd + ".csv")
+
+    if ctx.triggered_id == "section_dd":
+        anterior = section_dd
+    else:
+        anterior = section_options[0]["value"]
+        
+    return [map_data, section_options, anterior]
+
 
 
 if __name__ == "__main__":

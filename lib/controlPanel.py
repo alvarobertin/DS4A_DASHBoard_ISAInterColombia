@@ -2,7 +2,7 @@
 import pathlib
 import os
 from dash import Dash, callback, html, dcc, dash_table, Input, Output, State, MATCH, ALL
-
+import pandas as pd
 # Dash Bootstrap Components
 import dash_bootstrap_components as dbc
 
@@ -29,6 +29,31 @@ lines_dd = dcc.Dropdown(
     placeholder="Select Line"
 )
 
+# Dropdown SELECT LINE section
+
+def secciones(archive):
+    N = 1000000 # Numero de puntos por seccion 
+    DATA_DIR = "../data/"
+    csv_path = os.path.join(DATA_DIR, archive)
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), csv_path))
+
+    n = df.shape[0]/N
+    a = 0
+    section_options = []
+    for i in range(int(n)):
+        section_options.append({"label": "Section " + str(i + 1), "value": f"{a} {a + N}"})
+        a += N
+    return section_options
+
+section_op = secciones(lines[list(lines.keys())[0]] + ".csv")
+section_dd = dcc.Dropdown(
+    id="section_dd",
+    value = section_op[0]["value"],
+    options = section_op,
+    multi = False,
+    placeholder = "Select the section of the line"
+)
+
 # Dropdown SELECT Feature
 
 DATA_DIR = "data"
@@ -52,6 +77,10 @@ controlPanel = html.Div(
             #izq
             dbc.Col([
                 lines_dd
+            ]),
+            #mid
+            dbc.Col([
+                section_dd
             ]),
             #der
             dbc.Col([
