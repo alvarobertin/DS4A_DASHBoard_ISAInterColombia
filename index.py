@@ -34,15 +34,22 @@ from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap
 
 # PLACE THE COMPONENTS IN THE LAYOUT
 app.layout = html.Div(
-    [
+    children=[
         title.title,
-        dbc.Row([
-            controlPanel.controlPanel,
-            map.map,
-            riskCards.riskCards,
-            riskHeatMap.riskHeatMap,
-            riskPointTable.riskPointTable,
-        ])
+        dbc.Row(dbc.Col(
+            dbc.Spinner(
+            children=[
+                dbc.Row([
+                    controlPanel.controlPanel,
+                    map.map,
+                    riskCards.riskCards,
+                    riskHeatMap.riskHeatMap,
+                    riskPointTable.riskPointTable,],
+                )], 
+            fullscreen=True,
+            spinnerClassName="spinner"),
+            width={'size': 12, 'offset': 0}),
+        ),
     ],
     className="ds4a-app",  # You can also add your own css files by storing them in the assets folder
 )
@@ -82,7 +89,6 @@ def make_line_plot(lines_dd, section_dd):
         anterior = section_dd
     else:
         anterior = section_options[0]["value"]
-        
     return [map_data, section_options, anterior]
 
 
