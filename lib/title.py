@@ -11,7 +11,7 @@ from app import app
 title = html.Div(
     className="ds4a-title",
     children=[
-        dbc.Row(dbc.Col(html.H1("ISA Electric Lines Risk Dashboard"), width={"size": 6, "offset": 0})),
+        dbc.Row(dbc.Col(html.H1("ISA Electric Lines Risk Dashboard"), width={"size": 10, "offset": 0})),
         html.Hr()
     ],
     id="title",
