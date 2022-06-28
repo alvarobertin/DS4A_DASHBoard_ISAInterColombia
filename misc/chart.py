@@ -11,11 +11,13 @@ from dash import html
 def main():
     # archive = "LAS-1.csv"
     #archive = "torres.csv"
-    m = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/LAS-1.csv"))
+    m = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/Line1.csv"))
 
-    df2 = m[:1000000]
+    df2 = m[1000000*2:1000000*3]
 
     target = [df2.x.mean(), df2.y.mean(), df2.z.mean()]
+
+    df2 = df2[["x", "y", "z", "r", "g", "b"]]
 
     point_cloud_layer = pydeck.Layer(
         "PointCloudLayer",

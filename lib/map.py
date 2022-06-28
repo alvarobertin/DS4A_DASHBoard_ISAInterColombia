@@ -7,6 +7,7 @@ from dash import Dash, callback, html, dcc, dash_table, Input, Output, State, MA
 
 import os
 import pandas as pd
+import numpy as np
 
 # Dash Bootstrap Components
 import dash_bootstrap_components as dbc
@@ -19,6 +20,18 @@ def create(archive, a, b):
     csv_path = os.path.join(DATA_DIR, archive)
     
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), csv_path))
+
+    #df["r"] = np.where(df["Distance"].notnull(), "True", "")
+
+    # if "Distance" in df.columns:
+    #     df.loc[df["Distance"].notnull(), 'r'] = 255
+    #     df.loc[df["Distance"].notnull(), 'g'] = 0
+    #     df.loc[df["Distance"].notnull(), 'b'] = 0
+
+    
+    df = df[["x", "y", "z", "r", "g", "b"]]
+
+    df = df.sort_values(by=['y', 'x'])
 
     if a == 0 and b == 0:
         df2 = df[:1000000]
