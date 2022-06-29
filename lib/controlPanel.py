@@ -31,11 +31,8 @@ lines_dd = dcc.Dropdown(
 
 # Dropdown SELECT LINE section
 
-def secciones(archive):
+def secciones(df):
     N = 1000000 # Numero de puntos por seccion 
-    DATA_DIR = "../data/"
-    csv_path = os.path.join(DATA_DIR, archive)
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), csv_path))
 
     n = df.shape[0]/N
     a = 0
@@ -45,11 +42,12 @@ def secciones(archive):
         a += N
     return section_options
 
-section_op = secciones(lines[list(lines.keys())[0]] + ".csv")
+#section_op = secciones(lines[list(lines.keys())[0]] + ".csv")
+
 section_dd = dcc.Dropdown(
     id="section_dd",
-    value = section_op[0]["value"],
-    options = section_op,
+    #value = section_op[0]["value"],
+    #options = section_op,
     multi = False,
     placeholder = "Select the section of the line"
 )

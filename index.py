@@ -67,6 +67,10 @@ anterior = ""
         Output("deck-gl", "data"),
         Output("section_dd", "options"),
         Output("section_dd", "value"),
+        Output("total_card", "children"),
+        Output("high_card", "children"),
+        Output("medium_card", "children"),
+        Output("low_card", "children"),
     ],
     [
         Input("lines_dd", "value"),
@@ -74,6 +78,12 @@ anterior = ""
     ],
 )
 def make_line_plot(lines_dd, section_dd):
+    print("callback")
+
+    csv_path = os.path.join(DATA_DIR, lines_dd + ".csv")
+    
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), csv_path))
+
     if section_dd == None:
         a, b = 0, 0
     else:
@@ -81,15 +91,27 @@ def make_line_plot(lines_dd, section_dd):
         a = int(s[0])
         b = int(s[1])
 
-    map_data = map.create(lines_dd + ".csv", a, b)
+    map_data = map.create(df, a, b)
     # Esto se debe cambiar para no abrir tantas veces un csv 
-    section_options = controlPanel.secciones(lines_dd + ".csv")
+    section_options = controlPanel.secciones(df)
 
     if ctx.triggered_id == "section_dd":
         anterior = section_dd
     else:
         anterior = section_options[0]["value"]
-    return [map_data, section_options, anterior]
+
+    nTotal = 0
+    nHigh = 0
+    nMedium = 0
+    nLow = 0
+
+    if "Risk_Level" in df.columns:
+        nHigh = df[df['Risk_Level'] == "High Risk"]['Risk_Level'].count()
+        nMedium = df[df['Risk_Level'] == "Medium Risk"]['Risk_Level'].count()
+        nLow = df[df['Risk_Level'] == "Low Risk"]['Risk_Level'].count()
+        nTotal = nHigh + nMedium + nLow
+    print(nTotal)
+    return [map_data, section_options, anterior, nTotal, nHigh, nMedium, nLow]
 
 
 

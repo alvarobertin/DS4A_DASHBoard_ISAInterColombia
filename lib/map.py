@@ -16,10 +16,7 @@ import dash_bootstrap_components as dbc
 srcMap1 = "../assets/ssMapa.png"
 DATA_DIR = "../data/"
 
-def create(archive, a, b):
-    csv_path = os.path.join(DATA_DIR, archive)
-    
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), csv_path))
+def create(df, a, b):
 
     #df["r"] = np.where(df["Distance"].notnull(), "True", "")
 
@@ -70,12 +67,13 @@ def create(archive, a, b):
 from app import app
 
 
-result = dash_deck.DeckGL(create("LAS-1.csv", 0, 0), id="deck-gl")
+# result = dash_deck.DeckGL(create("LAS-1.csv", 0, 0), id="deck-gl")
+result = dash_deck.DeckGL({}, id="deck-gl")
 
 map = html.Div(
     className="ds4a-map",
     children=[
-        html.H5("Mapa"),
+        #html.H5("Mapa"),
         html.Div(result, id="containerMap")
     ],
     id="map",
