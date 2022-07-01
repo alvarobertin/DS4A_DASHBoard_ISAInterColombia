@@ -30,7 +30,7 @@ DATA_DIR = "data"
 
 
 # LOAD THE DIFFERENT FILES
-from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap
+from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap, calculator
 
 # PLACE THE COMPONENTS IN THE LAYOUT
 app.layout = html.Div(
@@ -43,6 +43,7 @@ app.layout = html.Div(
                     controlPanel.controlPanel,
                     map.map,
                     html.H6("", id="cords"),
+                    calculator.calculator,
                     riskCards.riskCards,
                     riskHeatMap.riskHeatMap,
                     riskPointTable.riskPointTable,],
@@ -128,7 +129,8 @@ def make_line_plot(lines_dd, section_dd):
 
 @app.callback(
     [
-        Output("cords", "children")
+        Output("CordX", "value"),
+        Output("CordY", "value")
     ], 
     [
         Input("deck-gl", "clickInfo")
@@ -136,11 +138,37 @@ def make_line_plot(lines_dd, section_dd):
 )
 def dump_json(data):
     value = ""
+    x = None
+    y = None
     if data != None:
         if data['object'] != None:
-            print(data['object'])
-            value = f"{data['object']['x']} {data['object']['y']}"
-    return [value]
+            #print(data['object'])
+            x = (data['object']['x'])
+            y = (data['object']['y'])
+            # value = f"{data['object']['x']} {data['object']['y']}"
+    return [x, y]
+
+
+@app.callback(
+    [
+        Output("Cords", "children"),
+        Output("CordsLink", "href")
+    ], 
+    [
+        Input("CordX", "value"),
+        Input("CordY", "value")
+    ]
+)
+def dump_json(x, y):
+    value = ""
+    link = ""
+    if x != None and y != None:
+        a, b = calculator.calc(float(x), float(y))
+
+        value = f"Coords: {a} {b}"
+        link = f"https://www.google.com/maps/search/?api=1&query={a},{b}"
+
+    return [value, link]
 
 if __name__ == "__main__":
     app.run_server(host="127.0.0.1", port="8050", debug=True)
