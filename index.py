@@ -42,6 +42,7 @@ app.layout = html.Div(
                 dbc.Row([
                     controlPanel.controlPanel,
                     map.map,
+                    html.H6("", id="cords"),
                     riskCards.riskCards,
                     riskHeatMap.riskHeatMap,
                     riskPointTable.riskPointTable,],
@@ -125,7 +126,21 @@ def make_line_plot(lines_dd, section_dd):
 
     return [map_data, section_options, anterior, nTotal, nHigh, nMedium, nLow, HeatMap]
 
-
+@app.callback(
+    [
+        Output("cords", "children")
+    ], 
+    [
+        Input("deck-gl", "clickInfo")
+    ]
+)
+def dump_json(data):
+    value = ""
+    if data != None:
+        if data['object'] != None:
+            print(data['object'])
+            value = f"{data['object']['x']} {data['object']['y']}"
+    return [value]
 
 if __name__ == "__main__":
     app.run_server(host="127.0.0.1", port="8050", debug=True)

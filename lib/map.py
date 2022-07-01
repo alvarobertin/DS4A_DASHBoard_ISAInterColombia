@@ -16,6 +16,10 @@ import dash_bootstrap_components as dbc
 srcMap1 = "../assets/ssMapa.png"
 DATA_DIR = "../data/"
 
+
+def test(widget_instance, payload):
+    print(widget_instance)
+
 def create(df):
 
     #df["r"] = np.where(df["Distance"].notnull(), "True", "")
@@ -58,7 +62,8 @@ def create(df):
 
     r = pydeck.Deck(point_cloud_layer, initial_view_state=view_state, views=[view])
     
-   
+    r.deck_widget.on_click(test)
+
     Rjson = r.to_json()
 
     return Rjson
@@ -68,7 +73,12 @@ from app import app
 
 
 # result = dash_deck.DeckGL(create("LAS-1.csv", 0, 0), id="deck-gl")
-result = dash_deck.DeckGL({}, id="deck-gl")
+tooltip = {
+    "html": "<b>{x}</b>, <b>{y}</b>",
+    "style": {"background": "grey", "color": "white", "font-family": '"Helvetica Neue", Arial', "z-index": "10000"},
+}
+result = dash_deck.DeckGL({}, id="deck-gl", tooltip=tooltip, enableEvents=['click'])
+
 
 map = html.Div(
     className="ds4a-map",
