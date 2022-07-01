@@ -16,7 +16,7 @@ import dash_bootstrap_components as dbc
 srcMap1 = "../assets/ssMapa.png"
 DATA_DIR = "../data/"
 
-def create(df, a, b):
+def create(df):
 
     #df["r"] = np.where(df["Distance"].notnull(), "True", "")
 
@@ -26,20 +26,20 @@ def create(df, a, b):
     #     df.loc[df["Distance"].notnull(), 'b'] = 0
 
     
-    df = df[["x", "y", "z", "r", "g", "b"]]
+    # df = df[["x", "y", "z", "r", "g", "b"]]
 
-    df = df.sort_values(by=['y', 'x'])
+    # df = df.sort_values(by=['y', 'x'])
 
-    if a == 0 and b == 0:
-        df2 = df[:1000000]
-    else:
-        df2 = df[a:b]
+    # if a == 0 and b == 0:
+    #     df2 = df[:1000000]
+    # else:
+    #     df2 = df[a:b]
 
-    target = [df2.x.median(), df2.y.median(), df2.z.median()]
+    target = [df.x.median(), df.y.median(), df.z.median()]
 
     point_cloud_layer = pydeck.Layer(
         "PointCloudLayer",
-        data=df2,
+        data= df,
         get_position=["x", "y", "z"],
         get_color=["r", "g", "b"],
         #get_normal=[0, 0, 15],

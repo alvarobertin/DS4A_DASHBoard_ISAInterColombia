@@ -71,6 +71,7 @@ anterior = ""
         Output("high_card", "children"),
         Output("medium_card", "children"),
         Output("low_card", "children"),
+        Output("HeatMap", "figure"),
     ],
     [
         Input("lines_dd", "value"),
@@ -84,6 +85,8 @@ def make_line_plot(lines_dd, section_dd):
     
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), csv_path))
 
+    section_options = controlPanel.secciones(df)
+
     if section_dd == None:
         a, b = 0, 0
     else:
@@ -91,9 +94,15 @@ def make_line_plot(lines_dd, section_dd):
         a = int(s[0])
         b = int(s[1])
 
-    map_data = map.create(df, a, b)
-    # Esto se debe cambiar para no abrir tantas veces un csv 
-    section_options = controlPanel.secciones(df)
+    df = df.sort_values(by=['y', 'x'])
+
+    if a == 0 and b == 0:
+        df = df[:1000000]
+    else:
+        df = df[a:b]
+
+    map_data = map.create(df[["x", "y", "z", "r", "g", "b"]])
+ 
 
     if ctx.triggered_id == "section_dd":
         anterior = section_dd
@@ -110,8 +119,11 @@ def make_line_plot(lines_dd, section_dd):
         nMedium = df[df['Risk_Level'] == "Medium Risk"]['Risk_Level'].count()
         nLow = df[df['Risk_Level'] == "Low Risk"]['Risk_Level'].count()
         nTotal = nHigh + nMedium + nLow
-    print(nTotal)
-    return [map_data, section_options, anterior, nTotal, nHigh, nMedium, nLow]
+
+    
+    HeatMap = riskHeatMap.create(df)
+
+    return [map_data, section_options, anterior, nTotal, nHigh, nMedium, nLow, HeatMap]
 
 
 
