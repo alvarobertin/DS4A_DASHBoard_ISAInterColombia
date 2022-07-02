@@ -10,7 +10,7 @@ import os
 import pandas as pd
 
 # Recall app
-from app import app
+#from app import app
 
 import plotly.graph_objects as go
 feature = [
@@ -52,7 +52,9 @@ heatMap = dbc.Container([
 riskHeatMap = html.Div(
     className="ds4a-riskHeatMap",
     children=[
-        html.H5("Risk level and risk type"),
+        html.H5("Risk level and risk type"
+        #,style = {'font-family':'Trade Gothic LT W01 Oblique','color': 'rgb(0,0,255)'}
+        ),
         heatMap,
     ],
     id="riskHeatMap",

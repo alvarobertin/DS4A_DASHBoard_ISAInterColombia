@@ -11,7 +11,7 @@ import os
 import pandas as pd
 
 # Recall app
-from app import app
+#from app import app
 
 DATA_DIR = "data"
 table_path = os.path.join(DATA_DIR, "riskPointTable.csv")
@@ -26,7 +26,9 @@ Rtable = dbc.Container([
 riskPointTable = html.Div(
     className="ds4a-riskPointTable",
     children=[
-        html.H5("Specific points with risk"),
+        html.H5("Specific points with risk"
+        #,style = {'font-family':'Trade Gothic LT W01 Oblique','color': 'rgb(0,0,255)' }
+        ),
         Rtable,
     ],
     id="riskPointTable",
