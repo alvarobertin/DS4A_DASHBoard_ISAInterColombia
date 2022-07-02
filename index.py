@@ -30,32 +30,10 @@ DATA_DIR = "data"
 
 
 # LOAD THE DIFFERENT FILES
-from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap
-#, calculator
+from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap,calculator
 
 # PLACE THE COMPONENTS IN THE LAYOUT
-app.layout = html.Div(
-    children=[
-        title.title,
-        dbc.Row(dbc.Col(
-            dbc.Spinner(
-            children=[
-                dbc.Row([
-                    controlPanel.controlPanel,
-                    map.map,
-                    html.H6("", id="cords"),
-                    #calculator.calculator,
-                    riskCards.riskCards,
-                    riskHeatMap.riskHeatMap,
-                    riskPointTable.riskPointTable,],
-                )], 
-            fullscreen=True,
-            spinnerClassName="spinner"),
-            width={'size': 12, 'offset': 0}),
-        ),
-    ],
-    className="ds4a-app",  # You can also add your own css files by storing them in the assets folder
-)
+app.layout 
 
 
 ###############################################
@@ -150,26 +128,26 @@ def dump_json(data):
     return [x, y]
 
 
-# @app.callback(
-#     [
-#         Output("Cords", "children"),
-#         Output("CordsLink", "href")
-#     ], 
-#     [
-#         Input("CordX", "value"),
-#         Input("CordY", "value")
-#     ]
-# )
-# def dump_json(x, y):
-#     value = ""
-#     link = ""
-#     if x != None and y != None:
-#         a, b = calculator.calc(float(x), float(y))
+@app.callback(
+    [
+        Output("Cords", "children"),
+        Output("CordsLink", "href")
+    ], 
+    [
+        Input("CordX", "value"),
+        Input("CordY", "value")
+    ]
+)
+def dump_json(x, y):
+    value = ""
+    link = ""
+    if x != None and y != None:
+        a, b = calculator.calc(float(x), float(y))
 
-#         value = f"Coords: {a} {b}"
-#         link = f"https://www.google.com/maps/search/?api=1&query={a},{b}"
+        value = f"Coords: {a} {b}"
+        link = f"https://www.google.com/maps/search/?api=1&query={a},{b}"
 
-#     return [value, link]
+    return [value, link]
 
 if __name__ == "__main__":
     app.run_server(host="127.0.0.1", port="8050", debug=True)
