@@ -6,7 +6,7 @@ from dash import Dash, callback, html, dcc, dash_table, Input, Output, State, MA
 import dash_bootstrap_components as dbc
 
 # Recall app
-from app import app
+#from app import app
 
 riskCards = html.Div(
     className="ds4a-riskCards",

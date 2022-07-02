@@ -11,7 +11,7 @@ import dash_bootstrap_components as dbc
 import json
 
 # Recall app
-from app import app
+#from app import app
 
 
 # Dropdown SELECT LINE
@@ -70,7 +70,11 @@ features_dd = dcc.Dropdown(
 controlPanel = html.Div(
     className="ds4a-controlPanel",
     children=[
-        html.H5("Control Panel"),
+        html.H2(
+            "Control Panel"
+            #,style = {'font-family':'Trade Gothic LT W01 Oblique','color': 'rgb(0,0,255)' 
+        #,'textAlign' : 'center'}
+        ),
         dbc.Row([
             #izq
             dbc.Col([
@@ -81,9 +85,9 @@ controlPanel = html.Div(
                 section_dd
             ]),
             #der
-            dbc.Col([
-                features_dd
-            ]),
+            # dbc.Col([
+            #     features_dd
+            # ]),
         ])
         
     ],

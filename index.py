@@ -30,31 +30,10 @@ DATA_DIR = "data"
 
 
 # LOAD THE DIFFERENT FILES
-from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap, calculator
+from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap,calculator
 
 # PLACE THE COMPONENTS IN THE LAYOUT
-app.layout = html.Div(
-    children=[
-        title.title,
-        dbc.Row(dbc.Col(
-            dbc.Spinner(
-            children=[
-                dbc.Row([
-                    controlPanel.controlPanel,
-                    map.map,
-                    html.H6("", id="cords"),
-                    calculator.calculator,
-                    riskCards.riskCards,
-                    riskHeatMap.riskHeatMap,
-                    riskPointTable.riskPointTable,],
-                )], 
-            fullscreen=True,
-            spinnerClassName="spinner"),
-            width={'size': 12, 'offset': 0}),
-        ),
-    ],
-    className="ds4a-app",  # You can also add your own css files by storing them in the assets folder
-)
+app.layout 
 
 
 ###############################################

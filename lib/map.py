@@ -69,7 +69,7 @@ def create(df):
     return Rjson
     
 # Recall app
-from app import app
+#from app import app
 
 
 # result = dash_deck.DeckGL(create("LAS-1.csv", 0, 0), id="deck-gl")
