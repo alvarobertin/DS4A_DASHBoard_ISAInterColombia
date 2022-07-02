@@ -30,7 +30,8 @@ DATA_DIR = "data"
 
 
 # LOAD THE DIFFERENT FILES
-from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap#, calculator
+from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap
+#, calculator
 
 # PLACE THE COMPONENTS IN THE LAYOUT
 app.layout = html.Div(
@@ -149,34 +150,26 @@ def dump_json(data):
     return [x, y]
 
 
-@app.callback(
-    [
-        Output("deck-gl", "data"),
-        Output("section_dd", "options"),
-        Output("section_dd", "value"),
-    ],
-    [
-        Input("lines_dd", "value"),
-        Input("section_dd", "value"),
-    ],
-)
-def make_line_plot(lines_dd, section_dd):
-    if section_dd == None:
-        a, b = 0, 0
-    else:
-        s = section_dd.split()
-        a = int(s[0])
-        b = int(s[1])
+# @app.callback(
+#     [
+#         Output("Cords", "children"),
+#         Output("CordsLink", "href")
+#     ], 
+#     [
+#         Input("CordX", "value"),
+#         Input("CordY", "value")
+#     ]
+# )
+# def dump_json(x, y):
+#     value = ""
+#     link = ""
+#     if x != None and y != None:
+#         a, b = calculator.calc(float(x), float(y))
 
-    map_data = map.create(lines_dd + ".csv", a, b)
-    # Esto se debe cambiar para no abrir tantas veces un csv 
-    section_options = controlPanel.secciones(lines_dd + ".csv")
+#         value = f"Coords: {a} {b}"
+#         link = f"https://www.google.com/maps/search/?api=1&query={a},{b}"
 
-    if ctx.triggered_id == "section_dd":
-        anterior = section_dd
-    else:
-        anterior = section_options[0]["value"]
-    return [map_data, section_options, anterior]
+#     return [value, link]
 
 if __name__ == "__main__":
     app.run_server(host="127.0.0.1", port="8050", debug=True)

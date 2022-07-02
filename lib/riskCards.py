@@ -15,7 +15,7 @@ riskCards = html.Div(
             #Total
             dbc.Col(
                 children=[
-                    html.H6("150"),
+                    html.H6("0", id="total_card"),
                     html.H6("Total Risks")
                 ],
                 id="riskCardTotal",
@@ -24,7 +24,7 @@ riskCards = html.Div(
             #High
             dbc.Col(
                 children=[
-                    html.H6("30"),
+                    html.H6("0", id="high_card"),
                     html.H6("High Risks")
                 ],
                 id="riskCardHigh",
@@ -33,7 +33,7 @@ riskCards = html.Div(
             #Medium
             dbc.Col(
                 children=[
-                    html.H6("50"),
+                    html.H6("0", id="medium_card"),
                     html.H6("Medium Risks")
                 ],
                 id="riskCardMedium",
@@ -42,7 +42,7 @@ riskCards = html.Div(
             #Low
             dbc.Col(
                 children=[
-                    html.H6("70"),
+                    html.H6("0", id="low_card"),
                     html.H6("Low Risks")
                 ],
                 id="riskCardLow",
