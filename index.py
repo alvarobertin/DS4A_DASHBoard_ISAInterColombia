@@ -42,7 +42,6 @@ app.layout
 #
 ###############################################
 
-anterior = ""
 @app.callback(
     [
         Output("deck-gl", "data"),

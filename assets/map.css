@@ -1,10 +1,11 @@
 #containerMap{
     height: 50vh;
-    width: 99vw;
+    width: 82vw;
     /* height: 80vh;
     width: 40vw; */
     position: relative;
     margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 #deckgl-wrapper{

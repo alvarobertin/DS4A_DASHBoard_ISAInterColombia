@@ -19,21 +19,46 @@ def calc(x, y):
 calculator = html.Div(
     className="calculator",
     children=[
-        html.Div(
-            children=[
-                dbc.Col(
-                    dcc.Input(id='CordX', type='number', min=2, placeholder="X"),
-                ),
-                dbc.Col(
-                    dcc.Input(id='CordY', type='number', min=2, placeholder="Y")
-                ),
-                dbc.Col([
-                        html.H5(id="Cords"),
-                        html.A("Map", id="CordsLink", target="_blank")
-                    ]
-                ),
-            ]
-        ),
+        dbc.Row([
+            dbc.Col(md=1),
+            dbc.Col(
+                dcc.Markdown('''
+            *If you want to geolocate a point, select it in the map. Then, click on map to locate it on Google Maps.* 
+            *Zoom In and Zoom out for select the point.*''')),
+
+    ]),
+        dbc.Row([
+            dbc.Col(md=1),
+            dbc.Col(
+                dcc.Markdown('''
+            X Coordinate
+            '''),md=1
+            ),
+            dbc.Col([
+                dcc.Input(id='CordX', type='number', min=2, placeholder="X"),
+            ],md=4),
+            dbc.Col(
+                dcc.Markdown('''
+            Y Coordinate
+            '''),md=1
+            ),
+            dbc.Col([
+                dcc.Input(id='CordY', type='number', min=2, placeholder="Y")
+            ],md=4),
+            dbc.Col(md=1),
+        ], justify="center"),
+        dbc.Row([
+            dbc.Col(md=1),
+            dbc.Col(
+                html.H5(id="Cords"),
+                    md=4),
+            dbc.Col(
+                html.A("Map", id="CordsLink", target="_blank"),
+                md=4),
+            dbc.Col(md=1),
+        ], justify="center")
+
+
     ],
     id="calculator",
     

@@ -54,41 +54,53 @@ section_dd = dcc.Dropdown(
 
 # Dropdown SELECT Feature
 
-DATA_DIR = "data"
-features_path = os.path.join(DATA_DIR, "features.json")
-with open(features_path) as f:
-    features = json.loads(f.read())
+# DATA_DIR = "data"
+# features_path = os.path.join(DATA_DIR, "features.json")
+# with open(features_path) as f:
+#     features = json.loads(f.read())
 
-features_dd = dcc.Dropdown(
-    id="features_dd",
-    options=[{"label": key, "value": features[key]} for key in features.keys()],
-    multi=True,
-    placeholder="Select Feature"
-)
+# features_dd = dcc.Dropdown(
+#     id="features_dd",
+#     options=[{"label": key, "value": features[key]} for key in features.keys()],
+#     multi=True,
+#     placeholder="Select Feature"
+# )
 
 
 controlPanel = html.Div(
     className="ds4a-controlPanel",
     children=[
-        html.H2(
-            "Control Panel"
-            #,style = {'font-family':'Trade Gothic LT W01 Oblique','color': 'rgb(0,0,255)' 
-        #,'textAlign' : 'center'}
-        ),
         dbc.Row([
+            dbc.Col(md=1),
+            dbc.Col(html.H2(
+                     "Control Panel"
+            ), md=11),
+        ]),
+        dbc.Row([
+            dbc.Col(md=1),
+            dbc.Col(
+               dcc.Markdown('''
+                *Please select one power line and one segment to visualize it*
+                '''
+                ), md=11
+            )
+        ]),
+        
+        dbc.Row([
+            dbc.Col(md=1),
             #izq
             dbc.Col([
                 lines_dd
-            ]),
-            #mid
+            ],
+            md=5),
+            #der
             dbc.Col([
                 section_dd
-            ]),
-            #der
-            # dbc.Col([
-            #     features_dd
-            # ]),
-        ])
+            ],md=5),
+            dbc.Col(md=1),
+    
+        ],
+        justify="around")
         
     ],
     id="controlPanel"
