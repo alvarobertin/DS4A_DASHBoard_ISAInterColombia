@@ -13,6 +13,10 @@ import pyproj
 P = pyproj.Proj("+proj=tmerc +ellps=GRS80 +a=6378137.0 +rf=298.257222101 +pm=0 +x_0=5000000.0 +y_0=2000000.0 +lon_0=-73.0 +lat_0=4.0 +units=m +axis=enu ", preserve_units=True)
 
 def calc(x, y):
+    """
+    Takes x,y coordinates in meters
+    Returns lat, long coordinates
+    """
     a, b = P(x, y, inverse=True) 
     return b, a
 

@@ -59,7 +59,11 @@ app.layout
     ],
 )
 def make_line_plot(lines_dd, section_dd):
-    print("callback")
+    """
+    This callback recieves the line number and the section number
+    When is called by the dropdown of the line, it updates the map, section dropdown and every graphic
+    When is called by the dropdown of the section,  it updates the map and every graphic.
+    """
 
     csv_path = os.path.join(DATA_DIR, lines_dd + ".csv")
     
@@ -77,14 +81,14 @@ def make_line_plot(lines_dd, section_dd):
     df = df.sort_values(by=['y', 'x'])
 
     if a == 0 and b == 0:
-        df = df[:1000000]
+        df = df[:1000000] # The number of points per section is 1000000
     else:
         df = df[a:b]
 
     map_data = map.create(df[["x", "y", "z", "r", "g", "b"]])
  
 
-    if ctx.triggered_id == "section_dd":
+    if ctx.triggered_id == "section_dd": # It lets the dropdown section only update when the line is changed.
         anterior = section_dd
     else:
         anterior = section_options[0]["value"]
@@ -115,6 +119,10 @@ def make_line_plot(lines_dd, section_dd):
     ]
 )
 def dump_json(data):
+    """
+    This callback recieves the info of the click event on the map
+    Returns the x,y of the selecte point
+    """
     value = ""
     x = None
     y = None
@@ -138,6 +146,10 @@ def dump_json(data):
     ]
 )
 def dump_json(x, y):
+    """
+    This callback recieves de coordinates x,y 
+    returns the lon,lat coordinates with the google link 
+    """
     value = ""
     link = ""
     if x != None and y != None:

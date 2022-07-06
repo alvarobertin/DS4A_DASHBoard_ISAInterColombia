@@ -1,7 +1,13 @@
 {
-    "Line 1" : "LAS-1", 
-    "Line 2" : "LAS-2",
-    "linea distancias" : "Line1",
-    "Line 4" : "LAS-4",
-    "Line 5" : "LAS-5"
+    "Line 1" : "Line1", 
+    "Line 2" : "Line2", 
+    "Line 3" : "Line3", 
+    "Line 4" : "Line4", 
+    "Line 5" : "Line5", 
+    "Line 6" : "Line6", 
+    "Line 7" : "Line7", 
+    "Line 8" : "Line8", 
+    "Line 9" : "Line9", 
+    "Line 10" : "Line10", 
+    "Line 11" : "Line11" 
 }
