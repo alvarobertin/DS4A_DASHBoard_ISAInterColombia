@@ -32,23 +32,31 @@ def create(df):
     else:
         fig = go.Figure(data=go.Heatmap({}, type = 'heatmap', colorscale = 'reds'))
 
+    fig.update_layout(plot_bgcolor='rgb(224,222,216)',paper_bgcolor='rgb(224,222,216)')
+    
+
     return fig
 
 
 heatMap = dbc.Container([
     dcc.Graph(
         id="HeatMap",
-        figure = go.Figure(data=go.Heatmap({}, type = 'heatmap', colorscale = 'reds')),
+        figure = go.Figure(data=go.Heatmap({}, type = 'heatmap', colorscale = 'reds'))
+
         )
 ])
 
 riskHeatMap = html.Div(
     className="ds4a-riskHeatMap",
     children=[
-        html.H5("Risk level and risk type"
-        #,style = {'font-family':'Trade Gothic LT W01 Oblique','color': 'rgb(0,0,255)'}
-        ),
-        heatMap,
+        dbc.Row([
+            dbc.Col(md=1),
+            dbc.Col(html.H5("Risk level and risk type"), md=11),
+        ]),
+        dbc.Row([
+            dbc.Col(md=1),
+            dbc.Col(heatMap)
+        ])
     ],
     id="riskHeatMap",
 )

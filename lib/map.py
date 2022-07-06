@@ -84,7 +84,16 @@ map = html.Div(
     className="ds4a-map",
     children=[
         #html.H5("Mapa"),
-        html.Div(result, id="containerMap")
+        dbc.Row([
+            dbc.Col(md=1),
+            #izq
+            dbc.Col([
+                html.Div(result, id="containerMap")
+            ],
+            md=10),
+            dbc.Col(md=1),
+        ]),
+        
     ],
     id="map",
 )

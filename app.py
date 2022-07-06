@@ -26,38 +26,13 @@ app.title = 'Dashboard ISA'
 # We need this for function callbacks not present in the app.layout
 app.config.suppress_callback_exceptions = True
 
-from lib import map, controlPanel, riskCards, riskPointTable, riskHeatMap,calculator
+from lib import map, controlPanel, riskCards, riskPointTable, riskHeatMap,calculator,header
 
 app.layout= html.Div(
         style={'backgroundColor': 'rgb(224,222,216)'},
         children= [
 ############################ Header
-        dbc.Row([
-                dbc.Col(
-                        html.Img(
-                                src='assets\ds4a.png',
-                                height = "auto",
-                                width = '100',), 
-                        width={"size": "auto","offset":1},
-                        md=0
-                ),
-                dbc.Col(
-                        html.H1('POWER TRANSMISSION LINES RISK DETECTION THROUGH LIDAR DATA ANALYSIS',
-                                style = {'font-family':'Trade Gothic LT W01 Oblique','color': 'rgb(0,0,255)','textAlign' : 'center'}), 
-                        width={"size": "auto"},
-                        md=8
-                ),
-                dbc.Col(
-                        html.Img(
-                                src='assets\logo_isa.png',
-                                height = '100',
-                                #width = 'auto'
-                                ), 
-                        width={"size": "auto"},
-                        md=1
-                ),
-        ],
-        ),
+        header.header,
         dbc.Row(html.Hr()),
         dbc.Row(
                 dbc.Col(
@@ -65,11 +40,13 @@ app.layout= html.Div(
                                 dbc.Row([
                                 controlPanel.controlPanel,
                                 map.map,
-                                html.H6("", id="cords"),
+                                #html.H6("", id="cords"),
                                 calculator.calculator,
                                 riskCards.riskCards,
+                                dbc.Row(html.Hr()),
                                 riskHeatMap.riskHeatMap,
-                                riskPointTable.riskPointTable,])
+                                #riskPointTable.riskPointTable,
+                                ])
                 ], 
             fullscreen=True,
             spinnerClassName="spinner"),

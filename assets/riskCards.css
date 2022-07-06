@@ -2,9 +2,8 @@
 .riskCard{
     border-style: solid;
     text-align: center;
-    margin-left: 1%;
-    margin-right: 1%;
     margin-top: 1%;
+    margin-bottom: 1%;
     font-size: 100px;
     font-style: normal;
     font-weight: bold;
@@ -13,18 +12,26 @@
 
 #riskCardTotal{
     background-color: white;
+    margin-left: 160px;
+    margin-right: 10px;
     
 }
 
 #riskCardHigh{
     background-color: red;
+    margin-left: 10px;
+    margin-right: 10px;
 
 }
 
 #riskCardMedium{
     background-color: peru;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #riskCardLow{
     background-color: orange;
+    margin-left: 10px;
+    margin-right: 170px;
 }
