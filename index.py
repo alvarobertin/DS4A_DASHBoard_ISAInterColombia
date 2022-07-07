@@ -30,7 +30,7 @@ DATA_DIR = "data"
 
 
 # LOAD THE DIFFERENT FILES
-from lib import title, map, controlPanel, riskCards, riskPointTable, riskHeatMap,calculator
+from lib import title, map, controlPanel, riskCards, riskHeatMap,calculator
 
 # PLACE THE COMPONENTS IN THE LAYOUT
 app.layout 

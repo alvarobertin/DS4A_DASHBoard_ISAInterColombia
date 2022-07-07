@@ -52,20 +52,6 @@ section_dd = dcc.Dropdown(
     placeholder = "Select the section of the line"
 )
 
-# Dropdown SELECT Feature
-
-# DATA_DIR = "data"
-# features_path = os.path.join(DATA_DIR, "features.json")
-# with open(features_path) as f:
-#     features = json.loads(f.read())
-
-# features_dd = dcc.Dropdown(
-#     id="features_dd",
-#     options=[{"label": key, "value": features[key]} for key in features.keys()],
-#     multi=True,
-#     placeholder="Select Feature"
-# )
-
 
 controlPanel = html.Div(
     className="ds4a-controlPanel",

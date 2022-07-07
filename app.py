@@ -26,7 +26,7 @@ app.title = 'Dashboard ISA'
 # We need this for function callbacks not present in the app.layout
 app.config.suppress_callback_exceptions = True
 
-from lib import map, controlPanel, riskCards, riskPointTable, riskHeatMap,calculator,header
+from lib import map, controlPanel, riskCards, riskHeatMap,calculator,header
 
 app.layout= html.Div(
         style={'backgroundColor': 'rgb(224,222,216)'},
@@ -45,7 +45,6 @@ app.layout= html.Div(
                                 riskCards.riskCards,
                                 dbc.Row(html.Hr()),
                                 riskHeatMap.riskHeatMap,
-                                #riskPointTable.riskPointTable,
                                 ])
                 ], 
             fullscreen=True,
@@ -53,43 +52,3 @@ app.layout= html.Div(
             width={'size': 12, 'offset': 0}))
 ]
 )
-
-###############################################
-#
-#           APP INTERACTIVITY:
-#
-###############################################
-
-# anterior = ""
-# @app.callback(
-#     [
-#         Output("deck-gl", "data"),
-#         Output("section_dd", "options"),
-#         Output("section_dd", "value"),
-#     ],
-#     [
-#         Input("lines_dd", "value"),
-#         Input("section_dd", "value"),
-#     ],
-# )
-# def make_line_plot(lines_dd, section_dd):
-#     if section_dd == None:
-#         a, b = 0, 0
-#     else:
-#         s = section_dd.split()
-#         a = int(s[0])
-#         b = int(s[1])
-
-#     map_data = map.create(lines_dd + ".csv", a, b)
-#     # Esto se debe cambiar para no abrir tantas veces un csv 
-#     section_options = controlPanel.secciones(lines_dd + ".csv")
-
-#     if ctx.triggered_id == "section_dd":
-#         anterior = section_dd
-#     else:
-#         anterior = section_options[0]["value"]
-#     return [map_data, section_options, anterior]
-
-
-# if __name__ == "__main__":
-#     app.run_server(host="127.0.0.1", port="8051", debug=True)

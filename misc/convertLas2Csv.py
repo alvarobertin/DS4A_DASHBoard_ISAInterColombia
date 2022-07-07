@@ -31,8 +31,8 @@ def transform_colors(f):
 def main():
     input_path = "../data/"
     dataname = "MDS-"
-
-    for i in range(1, 12):
+    N = 11
+    for i in range(1, N + 1):
 
         print("converting #" + str(i) + "...")
 
